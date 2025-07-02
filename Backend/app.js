@@ -8,13 +8,25 @@ import { dbConnection } from "../Backend/database/dbConnection.js";
 const app = express();
 dotenv.config({ path: "./config.env" });
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://bs-restraunt.netlify.app"
+];
+
 app.use(
   cors({
-    origin: ["http://localhost:5173"],
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: ["POST"],
     credentials: true,
   })
 );
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
