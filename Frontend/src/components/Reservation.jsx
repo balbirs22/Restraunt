@@ -19,7 +19,7 @@ const Reservation = () => {
       // Form validation can be added here
 
       const { data } = await axios.post(
-        "http://localhost:4000/api/v1/reservation/send",
+        "https://restraunt-irkr.onrender.com/api/v1/reservation/send",
         { firstName, lastName, email, phone, date, time },
         {
           headers: {
